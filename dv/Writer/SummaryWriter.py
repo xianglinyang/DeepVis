@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-class SummaryWriter(ABC):
+class SummaryWriterAbstractClass(ABC):
     """Writes entries directly to event files in the log_dir to be
     consumed by TensorBoard.
 
