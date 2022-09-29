@@ -1,4 +1,5 @@
-class SummaryWriter(object):
+from abc import ABC, abstractmethod
+class SummaryWriter(ABC):
     """Writes entries directly to event files in the log_dir to be
     consumed by TensorBoard.
 
@@ -9,6 +10,7 @@ class SummaryWriter(object):
     training.
     """
 
+    @abstractmethod
     def __init__(self, log_dir):
         """Creates a `SummaryWriter` that will write out events and summaries
         to the event file.
@@ -18,25 +20,31 @@ class SummaryWriter(object):
         """
         log_dir = str(log_dir)
         self.log_dir = log_dir
-
+    
     def get_logdir(self):
         """Returns the directory where event file will be written."""
         return self.log_dir
     
+    @abstractmethod
     def add_training_data(self, dataset, transform):
         pass
 
+    @abstractmethod
     def add_testing_data(self, dataset, transform):
         pass
 
-    def add_epoch_data(self, epoch, state_dict, idxs):
+    @abstractmethod
+    def add_checkpoint_data(self, relative_path, state_dict, idxs):
         pass
 
-    def add_config(self,):
+    @abstractmethod
+    def add_config(self, *args, **kwargs):
         pass
 
-    def add_subject_model(self,):
+    @abstractmethod
+    def add_subject_model(self, *args, **kwargs):
         pass
 
-    def add_iteration_structure(self,):
+    @abstractmethod
+    def add_iteration_structure(self, *args, **kwargs):
         pass
